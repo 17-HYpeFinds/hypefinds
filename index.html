@@ -1,1 +1,96 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="HypeFinds: discover useful finds for home, tech, family and more."><title>HypeFinds | Great finds, everyday</title><style>:root{--ink:#172237;--muted:#64748b;--accent:#ff653d;--bg:#f6f8fc}*{box-sizing:border-box}body{margin:0;font:16px system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);background:var(--bg)}header{background:white;border-bottom:1px solid #e5e9f1;position:sticky;top:0;z-index:2}.wrap{max-width:1160px;margin:auto;padding:0 24px}.nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;flex-wrap:wrap}.logo{font-size:27px;font-weight:900;letter-spacing:-1px}.logo span{color:var(--accent)}nav a{color:#334155;text-decoration:none;margin-left:20px;font-size:14px}.hero{background:linear-gradient(120deg,#14233e,#304d7c);color:white;padding:75px 0}.hero h1{font-size:clamp(38px,6vw,70px);line-height:1.04;max-width:700px;margin:0 0 18px;letter-spacing:-2px}.hero p{max-width:550px;color:#dce6f7;font-size:19px}.pill{display:inline-block;background:#ffffff22;padding:9px 14px;border-radius:30px;font-size:13px;margin-bottom:20px}.cta{display:inline-block;background:var(--accent);color:white;text-decoration:none;padding:14px 23px;border-radius:12px;font-weight:750;margin-top:12px}section{padding:45px 0}h2{font-size:29px;letter-spacing:-.6px;margin:0 0 10px}.sub{color:var(--muted);margin:0 0 25px}.categories{display:flex;gap:10px;flex-wrap:wrap}.filter{border:1px solid #dbe1ea;background:white;padding:11px 16px;border-radius:30px;cursor:pointer;font-weight:600;color:#334155}.filter.active{background:#1e3355;color:white;border-color:#1e3355}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:20px}.card{background:white;border:1px solid #e5eaf2;border-radius:19px;overflow:hidden;display:flex;flex-direction:column}.visual{height:170px;background:linear-gradient(135deg,#e8edf7,#dbe6fa);display:grid;place-items:center;font-size:64px}.info{padding:20px;display:flex;flex:1;flex-direction:column}.tag{font-size:12px;font-weight:800;color:#d95632;text-transform:uppercase;letter-spacing:.7px}.info h3{font-size:19px;margin:10px 0 8px}.info p{color:var(--muted);font-size:14px;line-height:1.5;flex:1}.shop{border:0;background:#1e3355;color:white;border-radius:10px;padding:12px;cursor:pointer;font-weight:700;width:100%}.shop:disabled{background:#dce2ec;color:#59677c;cursor:not-allowed}.notice{background:#fff4e9;border:1px solid #ffd8b9;border-radius:14px;padding:18px;line-height:1.6;color:#75421e}footer{background:#14233e;color:#dbe5f4;padding:35px 0;margin-top:30px}footer p{font-size:13px;line-height:1.7}#empty{display:none;color:var(--muted);padding:20px 0}@media(max-width:600px){nav a{margin:0 12px 0 0}.hero{padding:55px 0}}</style></head><body><header><div class="wrap nav"><div class="logo">Hype<span>Finds</span>.</div><nav><a href="#categories">Categories</a><a href="#finds">Featured Finds</a><a href="#disclosure">About</a></nav></div></header><div class="hero"><div class="wrap"><span class="pill">✨ Discover something useful</span><h1>Great finds.<br>Everyday living.</h1><p>Explore clever tech, home essentials, family favorites and seasonal inspiration — all in one place.</p><a class="cta" href="#finds">Explore the finds →</a></div></div><main class="wrap"><section id="categories"><h2>Shop by category</h2><p class="sub">Explore our starter collections.</p><div class="categories" id="filters"></div></section><section id="finds"><h2>Featured finds</h2><p class="sub">Starter collection previews. Product links will activate after affiliate approval and verification.</p><div class="grid" id="products"></div><p id="empty">No products in this category yet.</p></section><section id="disclosure"><h2>How HypeFinds works</h2><div class="notice"><strong>Affiliate disclosure:</strong> HypeFinds may earn a commission when you purchase through qualifying links on our site, at no additional cost to you. We will clearly identify commission-earning links when they are active. Products shown here are illustrative placeholders, not verified listings or current deals.</div></section></main><footer><div class="wrap"><div class="logo">Hype<span>Finds</span>.</div><p>Curated discoveries for everyday life. © <span id="year"></span> HypeFinds. All rights reserved.</p><p>We do not process purchases. When affiliate links are active, purchases take place on third-party retailers' websites.</p></div></footer><script>const products=[{name:'Wireless Charging Station',category:'Electronics',emoji:'🔋',description:'A convenient desktop charging solution.'},{name:'Creative Building Set',category:'Toys',emoji:'🧱',description:'Imaginative play for kids. Check age and safety guidance.'},{name:'Reusable Organizer Set',category:'Everyday Essentials',emoji:'🧺',description:'Make everyday storage simpler.'},{name:'Skincare Organizer',category:'Health & Beauty',emoji:'🧴',description:'Keep daily beauty essentials within reach.'},{name:'Kitchen Storage Containers',category:'Home & Kitchen',emoji:'🍱',description:'Organize pantry and meal prep spaces.'},{name:'Baby Essentials Organizer',category:'Baby',emoji:'🍼',description:'Keep frequently used baby supplies tidy.'},{name:'Easy-Grip Garden Tools',category:'55+ Lifestyle',emoji:'🌱',description:'Comfort-focused tools for home gardening.'},{name:'Holiday Table Decor',category:'Seasonal',emoji:'🍂',description:'Bring a festive touch to gatherings.'}];const cats=['All',...new Set(products.map(p=>p.category))];let active='All';function render(){document.getElementById('filters').innerHTML=cats.map(c=>`<button class="filter ${active===c?'active':''}" data-cat="${c}">${c}</button>`).join('');document.querySelectorAll('.filter').forEach(b=>b.addEventListener('click',()=>{active=b.dataset.cat;render()}));const shown=products.filter(p=>active==='All'||p.category===active);document.getElementById('products').innerHTML=shown.map(p=>`<article class="card"><div class="visual" aria-hidden="true">${p.emoji}</div><div class="info"><span class="tag">${p.category}</span><h3>${p.name}</h3><p>${p.description}</p><button class="shop" disabled title="Affiliate link pending">Link coming soon</button></div></article>`).join('');document.getElementById('empty').style.display=shown.length?'none':'block'}document.getElementById('year').textContent=new Date().getFullYear();render();</script></body></html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="HypeFinds: discover useful finds for home, tech, family and more."><title>HypeFinds | Great finds, everyday</title><style>:root{--ink:#172237;--muted:#64748b;--accent:#ff653d;--bg:#f6f8fc}*{box-sizing:border-box}body{margin:0;font:16px system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);background:var(--bg)}header{background:white;border-bottom:1px solid #e5e9f1;position:sticky;top:0;z-index:2}.wrap{max-width:1160px;margin:auto;padding:0 24px}.nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;flex-wrap:wrap}.logo{font-size:27px;font-weight:900;letter-spacing:-1px}.logo span{color:var(--accent)}nav a{color:#334155;text-decoration:none;margin-left:20px;font-size:14px}.hero{background:linear-gradient(120deg,#14233e,#304d7c);color:white;padding:75px 0}.hero h1{font-size:clamp(38px,6vw,70px);line-height:1.04;max-width:700px;margin:0 0 18px;letter-spacing:-2px}.hero p{max-width:550px;color:#dce6f7;font-size:19px}.pill{display:inline-block;background:#ffffff22;padding:9px 14px;border-radius:30px;font-size:13px;margin-bottom:20px}.cta{display:inline-block;background:var(--accent);color:white;text-decoration:none;padding:14px 23px;border-radius:12px;font-weight:750;margin-top:12px}section{padding:45px 0}h2{font-size:29px;letter-spacing:-.6px;margin:0 0 10px}.sub{color:var(--muted);margin:0 0 25px}.categories{display:flex;gap:10px;flex-wrap:wrap}.filter{border:1px solid #dbe1ea;background:white;padding:11px 16px;border-radius:30px;cursor:pointer;font-weight:600;color:#334155}.filter.active{background:#1e3355;color:white;border-color:#1e3355}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:20px}.card{background:white;border:1px solid #e5eaf2;border-radius:19px;overflow:hidden;display:flex;flex-direction:column}.visual{height:190px;background:linear-gradient(135deg,#e8edf7,#dbe6fa);display:grid;place-items:center;font-size:64px}.visual img{display:block;width:100%;height:100%;object-fit:cover}.info{padding:20px;display:flex;flex:1;flex-direction:column}.tag{font-size:12px;font-weight:800;color:#d95632;text-transform:uppercase;letter-spacing:.7px}.info h3{font-size:19px;margin:10px 0 8px}.info p{color:var(--muted);font-size:14px;line-height:1.5;flex:1}.shop{border:0;background:#1e3355;color:white;border-radius:10px;padding:12px;cursor:pointer;font-weight:700;width:100%}.shop:disabled{background:#dce2ec;color:#59677c;cursor:not-allowed}.notice{background:#fff4e9;border:1px solid #ffd8b9;border-radius:14px;padding:18px;line-height:1.6;color:#75421e}footer{background:#14233e;color:#dbe5f4;padding:35px 0;margin-top:30px}footer p{font-size:13px;line-height:1.7}#empty{display:none;color:var(--muted);padding:20px 0}@media(max-width:600px){nav a{margin:0 12px 0 0}.hero{padding:55px 0}}</style></head><body><header><div class="wrap nav"><div class="logo">Hype<span>Finds</span>.</div><nav><a href="#categories">Categories</a><a href="#finds">Featured Finds</a><a href="#disclosure">About</a></nav></div></header><div class="hero"><div class="wrap"><span class="pill">✨ Discover something useful</span><h1>Great finds.<br>Everyday living.</h1><p>Explore clever tech, home essentials, family favorites and seasonal inspiration — all in one place.</p><a class="cta" href="#finds">Explore the finds →</a></div></div><main class="wrap"><section id="categories"><h2>Shop by category</h2><p class="sub">Explore our starter collections.</p><div class="categories" id="filters"></div></section><section id="finds"><h2>Featured finds</h2><p class="sub">Ten curated product ideas with original illustrative artwork. Shopping links will activate when verified affiliate links are added.</p><div class="grid" id="products"></div><p id="empty">No products in this category yet.</p></section><section id="disclosure"><h2>How HypeFinds works</h2><div class="notice"><strong>Affiliate disclosure:</strong> HypeFinds may earn a commission when you purchase through qualifying links on our site, at no additional cost to you. We will clearly identify commission-earning links when they are active. Product images are original illustrations, not official product photography. Product selections are editorial examples; prices, stock and deals are not verified. Shopping links will activate when verified affiliate links are added.</div></section></main><footer><div class="wrap"><div class="logo">Hype<span>Finds</span>.</div><p>Curated discoveries for everyday life. © <span id="year"></span> HypeFinds. All rights reserved.</p><p>We do not process purchases. When affiliate links are active, purchases take place on third-party retailers' websites.</p></div></footer><script>
+const products = [
+  {
+    "name": "Anker MagGo 3-in-1 Wireless Charging Station",
+    "category": "Electronics",
+    "image": "images/anker-charger.png",
+    "description": "A space-saving charging station for compatible phones, earbuds and watches. Check device compatibility before buying.",
+    "link": ""
+  },
+  {
+    "name": "LEGO Classic Medium Creative Brick Box 10696",
+    "category": "Toys",
+    "image": "images/lego-bricks.png",
+    "description": "A colorful building set for open-ended creativity. Review the manufacturer’s age guidance and small-parts warning.",
+    "link": ""
+  },
+  {
+    "name": "Rubbermaid Brilliance Food Storage Containers",
+    "category": "Home & Kitchen",
+    "image": "images/rubbermaid-containers.png",
+    "description": "Clear, stackable containers that help organize meals and leftovers. Check the set size and care instructions.",
+    "link": ""
+  },
+  {
+    "name": "CeraVe Hydrating Facial Cleanser",
+    "category": "Health & Beauty",
+    "image": "images/cerave-cleanser.png",
+    "description": "A gentle daily cleanser option for normal-to-dry skin. Check the ingredient list for personal sensitivities.",
+    "link": ""
+  },
+  {
+    "name": "OXO Good Grips Drawer Organizer Set",
+    "category": "Everyday Essentials",
+    "image": "images/oxo-organizers.png",
+    "description": "Simple compartment-style organization for desks, bathrooms or kitchen drawers. Confirm dimensions before ordering.",
+    "link": ""
+  },
+  {
+    "name": "Frida Baby Diaper Caddy Organizer",
+    "category": "Baby",
+    "image": "images/frida-caddy.png",
+    "description": "A portable storage idea for diapers, wipes and changing essentials. Keep supplies out of children’s reach.",
+    "link": ""
+  },
+  {
+    "name": "Fiskars Ergonomic Garden Hand Tools",
+    "category": "55+ Lifestyle",
+    "image": "images/fiskars-tools.png",
+    "description": "Comfort-minded gardening tools for everyday planting and maintenance. Compare grip sizes and tool types.",
+    "link": ""
+  },
+  {
+    "name": "Thanksgiving Table Runner and Decor",
+    "category": "Seasonal",
+    "image": "images/holiday-decor.png",
+    "description": "An easy seasonal accent for family gatherings. Compare material, measurements and cleaning instructions.",
+    "link": ""
+  },
+  {
+    "name": "Amazon Echo Pop Smart Speaker",
+    "category": "Electronics",
+    "image": "images/echo-speaker.png",
+    "description": "A compact voice-enabled speaker for compatible smart-home setups. Check connectivity and privacy settings.",
+    "link": ""
+  },
+  {
+    "name": "Melissa & Doug Wooden Puzzle",
+    "category": "Toys",
+    "image": "images/melissa-puzzle.png",
+    "description": "A classic hands-on puzzle idea. Choose an age-appropriate version and review safety labels.",
+    "link": ""
+  }
+];
+const cats=['All',...new Set(products.map(p=>p.category))];
+let active='All';
+function render(){
+ const filters=document.getElementById('filters');filters.replaceChildren();
+ cats.forEach(c=>{const b=document.createElement('button');b.className='filter'+(active===c?' active':'');b.textContent=c;b.addEventListener('click',()=>{active=c;render()});filters.appendChild(b)});
+ const grid=document.getElementById('products');grid.replaceChildren();
+ const shown=products.filter(p=>active==='All'||p.category===active);
+ shown.forEach(p=>{
+  const card=document.createElement('article');card.className='card';
+  const visual=document.createElement('div');visual.className='visual';
+  const img=document.createElement('img');img.src=p.image;img.alt='Illustrative artwork for '+p.name;img.loading='lazy';visual.appendChild(img);
+  const info=document.createElement('div');info.className='info';
+  const tag=document.createElement('span');tag.className='tag';tag.textContent=p.category;
+  const h=document.createElement('h3');h.textContent=p.name;
+  const desc=document.createElement('p');desc.textContent=p.description;
+  const btn=document.createElement(p.link?'a':'button');btn.className='shop';btn.textContent=p.link?'View product':'Affiliate link coming soon';
+  if(p.link){btn.href=p.link;btn.target='_blank';btn.rel='sponsored noopener noreferrer';btn.style.display='block';btn.style.textAlign='center';btn.style.textDecoration='none'}else{btn.disabled=true;btn.title='Affiliate link pending'}
+  info.append(tag,h,desc,btn);card.append(visual,info);grid.appendChild(card);
+ });
+ document.getElementById('empty').style.display=shown.length?'none':'block';
+}
+document.getElementById('year').textContent=new Date().getFullYear();render();
+</script></body></html>
